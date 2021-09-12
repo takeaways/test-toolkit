@@ -6,11 +6,14 @@ import { loading } from 'features/layout/layoutSlice';
 export const fetchAllMovies = createAsyncThunk(
   'movies/fetchAllMovies',
   async (term, { dispatch }) => {
-    dispatch(loading(true));
-    const response = await movieApi
-      .get(`?apiKey=${APIKey}&s=${term}&type=movie`)
-      .catch(console.error);
-    dispatch(loading(false));
-    return response.data;
+    try {
+      dispatch(loading(true));
+      const response = await movieApi.get(
+        `?apiKey=${APIKey}&s=${term.trim() || 'avengers'}&type=movie`,
+      );
+      return response.data;
+    } finally {
+      dispatch(loading(false));
+    }
   },
 );

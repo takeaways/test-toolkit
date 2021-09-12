@@ -15,8 +15,13 @@
   font-weight: 600;
 }
 
+.header-right{
+  display: flex;
+}
+
 .user-image,
 .user-image img {
   width: 38px;
   height: 38px;
+  margin-left: 5px;
 }
